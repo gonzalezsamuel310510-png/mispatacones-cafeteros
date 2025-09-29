@@ -1,0 +1,198 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patacones Cafeteros</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #FCD116; /* Amarillo bandera */
+      color: #2C3E50;
+    }
+
+    .contenedor {
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 40px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0px 6px 20px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    /* PORTADA */
+    #principal {
+      display: block;
+      padding: 60px;
+    }
+
+    #principal img {
+      width: 250px;
+      margin-bottom: 30px;
+    }
+
+    #principal h1 {
+      font-size: 5rem;
+      font-family: "Georgia", serif;
+      font-weight: bold;
+      margin-bottom: 40px;
+      color: #2C3E50;
+      text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+    }
+
+    #principal button {
+      padding: 18px 35px;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #2C3E50;
+      color: white;
+      transition: 0.3s;
+    }
+
+    #principal button:hover {
+      background: #c0392b;
+    }
+
+    /* NAVEGACIÓN Y SECCIONES */
+    nav {
+      margin: 20px 0 40px;
+    }
+
+    nav button {
+      margin: 10px;
+      padding: 15px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #2C3E50;
+      color: white;
+      transition: 0.3s;
+    }
+
+    nav button:hover {
+      background: #c0392b;
+    }
+
+    section {
+      display: none;
+      padding: 30px;
+      background: #fdfdfd;
+      margin-top: 20px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #c0392b;
+    }
+
+    img {
+      max-width: 70%;  /* 🔹 más pequeño */
+      border-radius: 10px;
+    }
+
+    /* TEXTO UBICACIÓN */
+    .ubicacion-texto {
+      font-family: "Papyrus", fantasy;
+      font-size: 22px;
+      margin-top: 15px;
+      color: #2C3E50;
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+
+    <!-- PORTADA PRINCIPAL -->
+    <section id="principal">
+      <img src="logo.png" alt="Logo Patacones Cafeteros">
+      <h1>PATACONES CAFETEROS</h1>
+      <button onclick="entrar()">Entrar</button>
+    </section>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div id="contenido" style="display:none;">
+      <nav id="menuNav">
+        <button id="btnMenu" onclick="mostrar('menu','btnMenu')">Menú</button>
+        <button id="btnAviso" onclick="mostrar('aviso','btnAviso')">Aviso</button>
+        <button id="btnUbicacion" onclick="mostrar('ubicacion','btnUbicacion')">Ubicación</button>
+        <button id="btnTarjeta" onclick="mostrar('tarjeta','btnTarjeta')">Tarjeta</button>
+        <button id="btnPresentacion" onclick="mostrar('presentacion','btnPresentacion')">Conócenos</button>
+      </nav>
+      <button id="btnPrincipal" onclick="volverPrincipal()" style="display:none;">Principal</button>
+
+      <section id="menu">
+        <h2>Menú</h2>
+        <img src="menu.png" alt="Menú Patacones Cafeteros">
+      </section>
+
+      <section id="aviso">
+        <h2>Aviso</h2>
+        <img src="aviso.png" alt="Aviso Patacones Cafeteros">
+      </section>
+
+      <section id="ubicacion">
+        <h2>Ubicación</h2>
+        <img src="ubicacion-nueva.png" alt="Ubicación">
+        <p class="ubicacion-texto">POLIDEPORTIVO MUNICIPAL DE TABIO, CUNDINAMARCA</p>
+      </section>
+
+      <section id="tarjeta">
+        <h2>Tarjeta de Presentación</h2>
+        <img src="tarjeta.png" alt="Tarjeta de Presentación">
+      </section>
+
+      <section id="presentacion">
+        <h2>Conócenos</h2>
+        <p style="font-size:18px; line-height:1.6;">
+          Bienvenidos a <b>Patacones Cafeteros</b>, un lugar donde el sabor tradicional colombiano
+          se combina con el amor por la cocina. Nuestro objetivo es brindarte una experiencia única
+          que te transportará a otro mundo con cada bocado. <br><br>
+          ¡Gracias por elegirnos!
+        </p>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    let ultimoBoton = null;
+
+    function mostrar(id, botonId) {
+      document.querySelectorAll("#contenido section").forEach(sec => sec.style.display = "none");
+      document.getElementById(id).style.display = "block";
+
+      document.getElementById("btnPrincipal").style.display = "inline-block";
+
+      if (ultimoBoton) {
+        document.getElementById(ultimoBoton).style.display = "inline-block";
+      }
+
+      document.getElementById(botonId).style.display = "none";
+      ultimoBoton = botonId;
+    }
+
+    function entrar() {
+      document.getElementById("principal").style.display = "none";
+      document.getElementById("contenido").style.display = "block";
+      mostrar("presentacion","btnPresentacion");
+    }
+
+    function volverPrincipal() {
+      document.getElementById("contenido").style.display = "none";
+      document.getElementById("principal").style.display = "block";
+
+      document.querySelectorAll("nav button").forEach(btn => btn.style.display = "inline-block");
+      document.getElementById("btnPrincipal").style.display = "none";
+    }
+  </script>
+</body>
+</html>
